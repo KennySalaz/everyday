@@ -1,0 +1,140 @@
+/* ── VelocitySection ─────────────────────────────────────── */
+.velocity-section {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: var(--color-primary, #4A3B32);
+    overflow: hidden;
+    padding: 7rem 0;
+}
+
+.velocity-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 100% 80% at 60% 50%,
+        rgba(212,175,55,0.10) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.velocity-inner {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────── */
+.velocity-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent, #D4AF37);
+    margin-bottom: 1.25rem;
+}
+
+/* ── Headline ────────────────────────────────────────────── */
+.velocity-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    will-change: filter, transform;
+}
+
+/* ── Tagline ─────────────────────────────────────────────── */
+.velocity-tagline {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    will-change: filter;
+}
+
+/* ── Keywords strip ──────────────────────────────────────── */
+.velocity-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 3rem;
+}
+
+.velocity-kw {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    padding: 4px 12px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.velocity-kw:hover {
+    color: var(--color-accent, #D4AF37);
+    border-color: rgba(212,175,55,0.5);
+}
+
+.velocity-dot {
+    color: rgba(212,175,55,0.5);
+    font-size: 1rem;
+}
+
+/* ── CTA ─────────────────────────────────────────────────── */
+.velocity-cta {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border: 1.5px solid var(--color-accent, #D4AF37);
+    color: var(--color-accent, #D4AF37);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.25s, color 0.25s;
+}
+
+.velocity-cta:hover {
+    background: var(--color-accent, #D4AF37);
+    color: var(--color-primary, #4A3B32);
+}
+
+/* ── Líneas decorativas ──────────────────────────────────── */
+.velocity-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.vl {
+    position: absolute;
+    width: 1px;
+    height: 120%;
+    top: -10%;
+    background: rgba(212,175,55,0.08);
+    will-change: transform;
+}
+
+.vl1 { right: 30%; }
+.vl2 { right: 18%; background: rgba(212,175,55,0.05); width: 2px; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .velocity-section {
+        padding: 5rem 0;
+        min-height: auto;
+    }
+
+    .velocity-headline {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+}

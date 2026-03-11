@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR — siempre visible · transparente solo en Home hero
+═══════════════════════════════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0;
+  /* Estado por defecto: blanco sólido (todas las páginas menos Home sin scroll) */
+  background-color: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Transparente: solo cuando .navbar NO tiene .is-scrolled (solo en Home) ── */
+/* La clase is-scrolled se aplica SIEMPRE fuera de Home, y en Home al bajar */
+.navbar:not(.is-scrolled) {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+}
+
+/* ── Estado scrolleado / fuera de Home ────────────────── */
+.navbar.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Contenedor ────────────────────────────────────────── */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* ── Logo ──────────────────────────────────────────────── */
+.navbar-logo a {
+  font-family: var(--font-heading, 'Playfair Display');
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ffffff; /* transparente = sobre hero oscuro */
+}
+.navbar.is-scrolled .navbar-logo a {
+  color: var(--color-primary, #4A3B32);
+}
+
+/* ── Links ─────────────────────────────────────────────── */
+.navbar-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+
+.navbar-links a {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 2.5px;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  color: rgba(255, 255, 255, 0.9); /* transparente = blanco */
+}
+.navbar.is-scrolled .navbar-links a {
+  color: #5a4d46;
+}
+
+/* Underline hover */
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--color-accent, #D4AF37);
+  transition: width 0.3s ease;
+}
+.navbar-links a:hover::after { width: 100%; }
+.navbar-links a:hover { color: #fff; }
+.navbar.is-scrolled .navbar-links a:hover { color: var(--color-primary, #4A3B32); }
+
+/* ── Acciones / Hamburguesa ────────────────────────────── */
+.navbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+}
+.navbar.is-scrolled .icon-btn {
+  color: #5a4d46;
+}
+.icon-btn:hover { color: #D4AF37; }
+
+/* ── Responsive ────────────────────────────────────────── */
+.mobile-only  { display: none; }
+.desktop-only { display: flex; }
+
+@media (max-width: 900px) {
+  .desktop-only { display: none; }
+  .mobile-only  { display: flex; }
+  .navbar-container { height: 62px; }
+}
+
+/* ── Mobile Menu Overlay ───────────────────────────────── */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 11, 9, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-content ul {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.mobile-menu-content a {
+  font-family: var(--font-heading, 'Playfair Display');
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: color 0.25s;
+}
+.mobile-menu-content a:hover { color: #D4AF37; }

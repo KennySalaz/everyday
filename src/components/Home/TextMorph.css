@@ -1,0 +1,28 @@
+/* ── TextMorph ───────────────────────────────────────────── */
+.text-morph {
+    display: inline-block;
+    color: var(--color-accent, #D4AF37);
+    will-change: opacity, transform, filter;
+    transition:
+        opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.38s ease;
+}
+
+.text-morph.visible {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg);
+    filter: blur(0px);
+}
+
+.text-morph.exit {
+    opacity: 0;
+    transform: translateY(-14px) skewX(-4deg);
+    filter: blur(6px);
+}
+
+.text-morph.enter {
+    opacity: 0;
+    transform: translateY(14px) skewX(4deg);
+    filter: blur(6px);
+}

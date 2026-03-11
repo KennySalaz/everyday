@@ -1,0 +1,4 @@
+.mask-reveal {
+    will-change: clip-path, opacity, transform;
+    overflow: hidden;
+}

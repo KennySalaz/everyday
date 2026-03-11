@@ -1,0 +1,119 @@
+/* ────────────────────────────────────────────────────────────
+   PRODUCT CARD — Luxury E-commerce Card
+   ──────────────────────────────────────────────────────────── */
+
+.product-card {
+  position: relative;
+  background: var(--color-background);
+  cursor: pointer;
+}
+
+/* ── Image Wrapper ────────────────────────────────────────── */
+.product-image-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+  background-color: var(--color-background-off);
+}
+
+/* Square 1:1 ratio for consistent grid */
+.product-image-container::before {
+  content: '';
+  display: block;
+  padding-top: 110%; /* slightly taller than square for fashion feel */
+}
+
+.product-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.07);
+}
+
+/* ── Quick-Add Overlay ───────────────────────────────────── */
+.product-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.add-to-cart-btn {
+  background-color: #fff;
+  color: var(--color-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.product-card:hover .add-to-cart-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* ── Product Info ─────────────────────────────────────────── */
+.product-info {
+  padding: 0.85rem 0 0.5rem;
+}
+
+.product-category {
+  font-size: 0.68rem;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.3rem;
+  font-family: var(--font-body);
+}
+
+.product-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.product-card:hover .product-name {
+  color: var(--color-primary);
+}
+
+.product-price {
+  font-family: var(--font-body);
+  color: var(--color-primary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}

@@ -1,0 +1,349 @@
+/* ═══════════════════════════════════════════════════════════════
+   LOGIN PAGE  –  two-column layout
+   Left: decorative panel  |  Right: form
+   Colors: primary #4A3B32  ·  accent #D4AF37
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Root: full viewport, two columns ─────────────────────── */
+.lp-root {
+    min-height: 100vh;
+    display: flex;
+    background: #ffffff;
+    font-family: inherit;
+}
+
+/* ═══════════════════════════════════════
+   LEFT PANEL
+═══════════════════════════════════════ */
+.lp-left {
+    flex: 0 0 45%;
+    background: linear-gradient(145deg, #4A3B32 0%, #6b5044 55%, #4A3B32 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+}
+
+/* Textura sutil */
+.lp-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(212,175,55,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(212,175,55,0.10) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Círculo decorativo de fondo */
+.lp-left::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.12);
+    top: -100px;
+    right: -200px;
+    pointer-events: none;
+}
+
+.lp-left-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 340px;
+    width: 100%;
+}
+
+/* Badge superior */
+.lp-left-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,175,55,0.18);
+    border: 1px solid rgba(212,175,55,0.35);
+    color: #D4AF37;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    width: fit-content;
+}
+
+/* Headline */
+.lp-left-headline {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* Subtext */
+.lp-left-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Tarjetas flotantes decorativas */
+.lp-cards-decor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.lp-card-decor {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 0.875rem 1.1rem;
+    backdrop-filter: blur(8px);
+}
+
+.lp-card-decor--a { transform: translateX(0); }
+.lp-card-decor--b { transform: translateX(1.5rem); }
+
+.lp-card-decor-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.lp-card-decor-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+.lp-card-decor-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.1rem;
+}
+
+/* ═══════════════════════════════════════
+   RIGHT PANEL
+═══════════════════════════════════════ */
+.lp-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    background: #ffffff;
+    position: relative;
+}
+
+/* Logo en la parte superior */
+.lp-brand {
+    position: absolute;
+    top: 2rem;
+    left: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lp-brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4A3B32, #6b5448);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D4AF37;
+    box-shadow: 0 3px 10px rgba(74,59,50,0.25);
+}
+
+.lp-brand-name {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #4A3B32;
+    letter-spacing: 0.02em;
+}
+
+/* Contenedor del formulario */
+.lp-form-wrap {
+    width: 100%;
+    max-width: 380px;
+}
+
+.lp-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.02em;
+}
+
+.lp-subtitle {
+    font-size: 0.875rem;
+    color: #9a8a7e;
+    margin: 0 0 2rem;
+}
+
+/* ── Formulario ─────────────────────────────────────────── */
+.lp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.lp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.lp-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4A3B32;
+    letter-spacing: 0.01em;
+}
+
+.lp-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid #e8e0d8;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    background: #f9f6f3;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    box-sizing: border-box;
+}
+
+.lp-input::placeholder { color: #c4b4a8; }
+
+.lp-input:focus {
+    border-color: #D4AF37;
+    background: #ffffff;
+    box-shadow: 0 0 0 3.5px rgba(212,175,55,0.15);
+}
+
+/* Campo contraseña */
+.lp-pass-wrap { position: relative; }
+
+.lp-input--pass { padding-right: 3rem; }
+
+.lp-eye-btn {
+    position: absolute;
+    right: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b5a090;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: color 0.2s;
+}
+.lp-eye-btn:hover { color: #4A3B32; }
+
+/* ── Error ───────────────────────────────────────────────── */
+.lp-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff5f5;
+    border: 1px solid #fcc;
+    border-radius: 10px;
+    padding: 0.65rem 0.875rem;
+    font-size: 0.82rem;
+    color: #c0392b;
+}
+
+/* ── Botón principal ─────────────────────────────────────── */
+.lp-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.95rem;
+    background: #D4AF37;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(212,175,55,0.40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.lp-btn:hover:not(:disabled) {
+    background: #c9a430;
+    box-shadow: 0 6px 20px rgba(212,175,55,0.50);
+    transform: translateY(-1px);
+}
+.lp-btn:active:not(:disabled) { transform: translateY(0); }
+.lp-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Spinner ─────────────────────────────────────────────── */
+.lp-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: lp-spin 0.7s linear infinite;
+}
+
+@keyframes lp-spin { to { transform: rotate(360deg); } }
+
+/* ── Footer ──────────────────────────────────────────────── */
+.lp-footer {
+    text-align: center;
+    font-size: 0.72rem;
+    color: #c4b4a8;
+    margin: 1.75rem 0 0;
+    letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — tablet / mobile
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+    .lp-root { flex-direction: column; }
+
+    .lp-left {
+        flex: none;
+        padding: 2.5rem 1.75rem;
+        min-height: 240px;
+    }
+
+    .lp-left-headline { font-size: 1.5rem; }
+    .lp-cards-decor { display: none; }
+
+    .lp-right { padding: 3rem 1.5rem 2.5rem; }
+    .lp-brand { top: 1.5rem; left: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .lp-left { min-height: 200px; padding: 2rem 1.5rem; }
+    .lp-left-headline { font-size: 1.3rem; }
+    .lp-title { font-size: 1.5rem; }
+}
+

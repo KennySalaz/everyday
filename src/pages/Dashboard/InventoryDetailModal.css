@@ -1,0 +1,380 @@
+/* ── Overlay ─────────────────────────────────────────────────── */
+.idd-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1100;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ── Panel lateral derecho ───────────────────────────────────── */
+.idd-panel {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: var(--color-background, #fff);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.idd-hero {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: var(--color-primary, #1a1a1a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.idd-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(18px) brightness(0.5);
+    transform: scale(1.1);
+}
+
+.idd-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
+}
+
+.idd-hero-img {
+    position: relative;
+    z-index: 1;
+    height: 170px;
+    width: 170px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.idd-hero-icon {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent, #d4af37);
+}
+
+/* Acciones hero */
+.idd-hero-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.idd-action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.idd-action-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Badge tipo en hero */
+.idd-hero-footer {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+}
+
+.idd-type-badge {
+    display: inline-block;
+    background: rgba(212,175,55,0.2);
+    color: var(--color-accent, #d4af37);
+    border: 1px solid rgba(212,175,55,0.35);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+    backdrop-filter: blur(6px);
+}
+
+/* ── Body ────────────────────────────────────────────────────── */
+.idd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Nombre + botón editar */
+.idd-name-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.idd-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+}
+
+.idd-edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--color-background-off);
+    border: 1.5px solid var(--color-border, #e2e8f0);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+    flex-shrink: 0;
+}
+
+.idd-edit-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+/* Chips */
+.idd-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: -0.75rem;
+}
+
+.idd-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+    background: var(--color-background-off);
+    color: var(--color-text-light);
+    border: 1.5px solid var(--color-border, #e2e8f0);
+    text-decoration: none;
+    transition: all 0.15s;
+}
+
+.idd-chip.link {
+    color: var(--color-accent);
+    border-color: rgba(212,175,55,0.3);
+    background: rgba(212,175,55,0.06);
+}
+
+.idd-chip.link:hover {
+    background: rgba(212,175,55,0.15);
+}
+
+/* Stats grid 2x2 */
+.idd-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.idd-stat-card {
+    background: var(--color-background-off);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    border: 1.5px solid transparent;
+}
+
+.idd-stat-card.accent {
+    background: rgba(212,175,55,0.06);
+    border-color: rgba(212,175,55,0.25);
+}
+
+.idd-stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-light);
+    margin: 0 0 0.35rem;
+}
+
+.idd-stat-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1;
+}
+
+.idd-stat-card.accent .idd-stat-val {
+    color: var(--color-accent);
+}
+
+/* Sección historial */
+.idd-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.idd-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+}
+
+.idd-section-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.idd-section-header svg {
+    color: var(--color-accent);
+}
+
+/* Empty history */
+.idd-empty-history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 0.83rem;
+    background: var(--color-background-off);
+    border-radius: 14px;
+}
+
+/* History list */
+.idd-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 2px solid var(--color-border, #e2e8f0);
+    padding-left: 1.1rem;
+    margin-left: 0.5rem;
+}
+
+.idd-history-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-border, #f1f5f9);
+    position: relative;
+}
+
+.idd-history-row:last-child {
+    border-bottom: none;
+}
+
+.idd-history-dot {
+    position: absolute;
+    left: -1.45rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border, #cbd5e1);
+    border: 2px solid var(--color-background, #fff);
+    flex-shrink: 0;
+}
+
+.idd-history-dot.current {
+    background: var(--color-accent);
+    width: 12px;
+    height: 12px;
+    left: -1.52rem;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+}
+
+.idd-history-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.idd-history-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.idd-history-row.current .idd-history-price {
+    color: var(--color-accent);
+}
+
+.idd-history-qty {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+}
+
+.idd-history-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(212,175,55,0.12);
+    color: var(--color-accent);
+    padding: 0.2rem 0.55rem;
+    border-radius: 99px;
+    white-space: nowrap;
+}
+
+.idd-history-date {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    white-space: nowrap;
+}
+
+/* Responsive móvil */
+@media (max-width: 480px) {
+    .idd-panel {
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .idd-overlay {
+        align-items: flex-end;
+    }
+}

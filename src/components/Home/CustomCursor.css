@@ -1,0 +1,109 @@
+/* Custom cursor — hide native */
+*, *::before, *::after { cursor: none !important; }
+
+/* ── Dot ───────────────────────────────────────────── */
+.cursor-dot {
+    position: fixed;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D4AF37;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.2s, height 0.2s, top 0.2s, left 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+}
+
+.cursor-dot--hover {
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
+    background: #ffffff;
+}
+
+.cursor-dot--drag,
+.cursor-dot--view {
+    width: 6px;
+    height: 6px;
+    top: -3px;
+    left: -3px;
+    background: #ffffff;
+    opacity: 0;
+}
+
+/* ── Ring ──────────────────────────────────────────── */
+.cursor-ring {
+    position: fixed;
+    top: -22px;
+    left: -22px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212,175,55,0.6);
+    pointer-events: none;
+    z-index: 99998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        width 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        height 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        top 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        left 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        background 0.25s,
+        border-color 0.25s;
+    mix-blend-mode: normal;
+}
+
+.cursor-ring--hover {
+    width: 64px;
+    height: 64px;
+    top: -32px;
+    left: -32px;
+    background: rgba(212,175,55,0.08);
+    border-color: rgba(212,175,55,0.9);
+}
+
+.cursor-ring--drag,
+.cursor-ring--view {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: -40px;
+    background: rgba(74,59,50,0.85);
+    border-color: transparent;
+}
+
+/* ── Label inside ring ─────────────────────────────── */
+.cursor-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #D4AF37;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* ── Trail ─────────────────────────────────────────── */
+.cursor-trail {
+    position: fixed;
+    top: -3px;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #D4AF37;
+    pointer-events: none;
+    z-index: 99997;
+    mix-blend-mode: difference;
+}
+
+/* Mobile: restore cursor */
+@media (pointer: coarse) {
+    *, *::before, *::after { cursor: auto !important; }
+    .cursor-dot, .cursor-ring, .cursor-trail { display: none !important; }
+}

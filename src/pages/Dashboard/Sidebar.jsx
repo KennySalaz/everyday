@@ -42,7 +42,7 @@ export default function Sidebar({ lowStockCount = 0, isOpen, onClose }) {
                             <li>
                                 <NavLink to="/ed-admin-2026/inventory" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={onClose}>
                                     <FileText size={20} />
-                                    <span>Inventario</span>
+                                    <span>Piezas</span>
                                 </NavLink>
                             </li>
                             <li>
@@ -74,7 +74,7 @@ export default function Sidebar({ lowStockCount = 0, isOpen, onClose }) {
                             <li>
                                 <Link to="/" className="nav-item return-link">
                                     <ArrowLeft size={20} />
-                                    <span>Volver a la Tienda</span>
+                                    <span>Volver a la landing</span>
                                 </Link>
                             </li>
                         </ul>

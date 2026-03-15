@@ -5,7 +5,7 @@ import { X, Pencil, Tag, Hash, Link as LinkIcon, Package, TrendingUp, Clock, Box
 import { ICONS } from '../Pricing';
 import './InventoryDetailModal.css';
 
-const TYPE_LABEL = { materia: 'Materia Prima', empaque: 'Material POP / Empaque' };
+const TYPE_LABEL = { materia: 'Materia Prima', empaque: 'Material POP / Empaque', encamino: 'En camino' };
 
 const formatUnitCost = (value) => {
     if (!value && value !== 0) return '0.00';

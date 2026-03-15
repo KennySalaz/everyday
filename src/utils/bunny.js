@@ -21,7 +21,7 @@ export const uploadToBunny = async (file, folder = "products") => {
     const uniqueFileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '')}`;
     
     // Bunny.net Storage API URL
-    // Format: https://storage.bunnycdn.com/{storage_zone_name}/{path}/{filename}
+    // As shown in the dashboard screenshot: storage.bunnycdn.com
     const url = `https://storage.bunnycdn.com/${BUNNY_STORAGE_ZONE}/${folder}/${uniqueFileName}`;
 
     try {

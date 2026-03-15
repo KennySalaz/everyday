@@ -102,6 +102,9 @@ export default function PricingDashboard({ initialTab }) {
     // Edit mode
     const [editingProductId, setEditingProductId] = useState(null);
 
+    // Shipping state for reference
+    const [shippingCost, setShippingCost] = useState('');
+
     // Filter States
     const [overviewSearch, setOverviewSearch] = useState('');
     const [overviewStockFilter, setOverviewStockFilter] = useState('all'); // all, available, out
@@ -187,6 +190,7 @@ export default function PricingDashboard({ initialTab }) {
                         <option value="all">Todos los Tipos</option>
                         <option value="materia">Materia Prima</option>
                         <option value="empaque">Empaque / POP</option>
+                        <option value="encamino">En camino</option>
                     </select>
                 </div>
 
@@ -212,7 +216,9 @@ export default function PricingDashboard({ initialTab }) {
 
                                 <div className="spotify-content modern-variant">
                                     <div className="card-top-actions">
-                                        <span className="card-badge">{item.type === 'materia' ? 'Materia' : 'Empaque'}</span>
+                                        <span className="card-badge">
+                                            {item.type === 'materia' ? 'Materia' : item.type === 'encamino' ? 'En camino' : 'Empaque'}
+                                        </span>
                                         <div className="action-buttons">
                                             <button className="glass-icon-btn" onClick={() => setDetailInventoryItem(item)} title="Ver detalle">
                                                 <Eye size={14} />
@@ -304,6 +310,11 @@ export default function PricingDashboard({ initialTab }) {
             setIsUploading(false);
         }
 
+        // Calcular costo de envío por unidad
+        const unidades = inventory.filter(i => i.type !== 'encamino').reduce((acc, i) => acc + (parseInt(i.totalQty) || 0), 0);
+        const envioPorUnidad = (shippingCost && unidades > 0) ? (parseFloat(shippingCost) / unidades) : 0;
+        const precioFinal = suggestedPrice + envioPorUnidad;
+
         const newProduct = {
             id: editingProductId || Date.now().toString(),
             name: productName,
@@ -312,6 +323,8 @@ export default function PricingDashboard({ initialTab }) {
             totalCost,
             profitMargin,
             suggestedPrice,
+            shippingCost: envioPorUnidad,
+            finalPrice: precioFinal,
             stock: productionQty,
             category: productCategory,
             date: new Date().toLocaleDateString()
@@ -836,7 +849,7 @@ export default function PricingDashboard({ initialTab }) {
                                             </div>
                                         </div>
                                         <div className="catalog-grid">
-                                            {inventory.map(item => {
+                                            {inventory.filter(item => item.type !== 'encamino').map(item => {
                                                 const isSelected = selectedItems.some(sel => sel.inventoryId === item.id);
                                                 const sel = selectedItems.find(s => s.inventoryId === item.id);
                                                 return (
@@ -962,8 +975,43 @@ export default function PricingDashboard({ initialTab }) {
                                     </div>
                                 </div>
 
-                                {/* ── Columna derecha: cotización ── */}
+                                { /* ── Columna derecha: cotización ── */ }
                                 <div className="admin-card quote-summary-panel">
+                                    {/* Nueva Sección: Cálculo de Envío */}
+                                    <div className="shipping-calc-block" style={{ marginBottom: '2rem', padding: '1.25rem', background: 'rgba(67,24,255,0.03)', borderRadius: '12px', border: '1px dashed rgba(67,24,255,0.2)' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                            <Package size={20} color="var(--color-primary)" />
+                                            <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-primary)' }}>Referencia de Envío</h4>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', fontSize: '0.9rem' }}>
+                                            <span style={{ color: 'var(--color-text-light)' }}>Total unidades (stock):</span>
+                                            <strong style={{ color: 'var(--color-primary)' }}>
+                                                {inventory.filter(i => i.type !== 'encamino').reduce((acc, i) => acc + (parseInt(i.totalQty) || 0), 0)} uds
+                                            </strong>
+                                        </div>
+                                        <div className="input-group" style={{ marginBottom: '0.75rem' }}>
+                                            <label style={{ fontSize: '0.85rem', marginBottom: '0.4rem', display: 'block' }}>Costo total del envío ($)</label>
+                                            <div style={{ position: 'relative' }}>
+                                                <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-light)', fontSize: '0.9rem' }}>$</span>
+                                                <input 
+                                                    type="number" 
+                                                    className="styled-input" 
+                                                    placeholder="0.00" 
+                                                    value={shippingCost}
+                                                    onChange={e => setShippingCost(e.target.value)}
+                                                    style={{ paddingLeft: '1.75rem', height: '38px', fontSize: '0.9rem' }}
+                                                />
+                                            </div>
+                                        </div>
+                                        {shippingCost > 0 && (
+                                            <div style={{ padding: '0.75rem', background: 'white', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                                                <span style={{ fontSize: '0.85rem', color: '#05cd99', fontWeight: 600 }}>Costo envío c/u:</span>
+                                                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#05cd99' }}>
+                                                    {(productionQty > 0 && shippingCost > 0) ? (parseFloat(shippingCost) / productionQty).toFixed(3) : '0.000'}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
 
                                     {/* Precio sugerido hero */}
                                     <div className="quote-price-hero">
@@ -1004,10 +1052,25 @@ export default function PricingDashboard({ initialTab }) {
                                             <span className="qb-label">Ganancia ({profitMargin}%)</span>
                                             <span className="qb-val gain">+${(suggestedPrice > 0 ? suggestedPrice - totalCost : 0).toFixed(2)}</span>
                                         </div>
+                                        <div className="qb-row">
+                                            <span className="qb-label">Costo de envío</span>
+                                            <span className="qb-val">{
+                                                (() => {
+                                                    const unidades = inventory.filter(i => i.type !== 'encamino').reduce((acc, i) => acc + (parseInt(i.totalQty) || 0), 0);
+                                                    return (shippingCost && unidades > 0) ? (parseFloat(shippingCost) / unidades).toFixed(3) : '0.000';
+                                                })()
+                                            }</span>
+                                        </div>
                                         <div className="qb-divider" />
                                         <div className="qb-row total">
                                             <span className="qb-label">Precio final</span>
-                                            <span className="qb-val">${suggestedPrice.toFixed(2)}</span>
+                                            <span className="qb-val">{
+                                                (() => {
+                                                    const unidades = inventory.filter(i => i.type !== 'encamino').reduce((acc, i) => acc + (parseInt(i.totalQty) || 0), 0);
+                                                    const envioPorUnidad = (shippingCost && unidades > 0) ? (parseFloat(shippingCost) / unidades) : 0;
+                                                    return (suggestedPrice + envioPorUnidad).toFixed(2);
+                                                })()
+                                            }</span>
                                         </div>
                                     </div>
 

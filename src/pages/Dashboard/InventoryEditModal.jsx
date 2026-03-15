@@ -199,6 +199,7 @@ export default function InventoryEditModal({ isOpen, onClose, onSave, item }) {
                                         <select className="styled-select" value={invType} onChange={e => setInvType(e.target.value)} required>
                                             <option value="materia">Materia Prima</option>
                                             <option value="empaque">Material POP / Empaque</option>
+                                            <option value="encamino">En camino</option>
                                         </select>
                                     </div>
                                     <div className="input-group">

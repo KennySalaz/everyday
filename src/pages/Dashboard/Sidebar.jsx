@@ -48,13 +48,13 @@ export default function Sidebar({ lowStockCount = 0, isOpen, onClose }) {
                             <li>
                                 <NavLink to="/ed-admin-2026/builder" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={onClose}>
                                     <Hammer size={20} />
-                                    <span>Producto</span>
+                                        <span>Crear Producto</span>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="/ed-admin-2026" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={onClose}>
                                     <LayoutDashboard size={20} />
-                                    <span>Resumen</span>
+                                        <span>Productos Disponibles</span>
                                     {lowStockCount > 0 && (
                                         <span className="nav-badge">{lowStockCount}</span>
                                     )}

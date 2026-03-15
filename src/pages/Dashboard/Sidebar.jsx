@@ -74,7 +74,7 @@ export default function Sidebar({ lowStockCount = 0, isOpen, onClose }) {
                             <li>
                                 <Link to="/" className="nav-item return-link">
                                     <ArrowLeft size={20} />
-                                    <span>Volver a la landing</span>
+                                    <span>Volver Al Home</span>
                                 </Link>
                             </li>
                         </ul>

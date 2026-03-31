@@ -20,7 +20,7 @@ const ProductDetails = () => {
         .slice(0, 3);
 
     const handleWhatsAppClick = () => {
-        const phoneNumber = "58000000000";
+        const phoneNumber = "584125594826";
         const message = `Hello, I'm interested in the *${product.name}* priced at $${product.price}. Is it available?`;
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');

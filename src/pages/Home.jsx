@@ -402,7 +402,7 @@ const Home = () => {
     const handleBuyWhatsApp = (product) => {
         const price = product.price ? product.price.toFixed(2) : '0.00';
         const text = `Hola! Me interesa comprar el producto: ${product.name} por $${price}`;
-        window.open(`https://wa.me/584241539300?text=${encodeURIComponent(text)}`, '_blank');
+        window.open(`https://wa.me/584125594826?text=${encodeURIComponent(text)}`, '_blank');
     };
 
     /* Scroll progress para la barra indicadora */

@@ -15,10 +15,10 @@ const Footer = () => {
                         <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
                             <Instagram size={18} />
                         </a>
-                        <a href="https://wa.me/584241539300" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+                        <a href="https://wa.me/584125594826" target="_blank" rel="noreferrer" aria-label="WhatsApp">
                             <MessageCircle size={18} />
                         </a>
-                        <a href="mailto:hello@everyday.com" aria-label="Email">
+                        <a href="mailto:Everydayvzla@gmail.com" aria-label="Email">
                             <Mail size={18} />
                         </a>
                     </div>
@@ -29,11 +29,11 @@ const Footer = () => {
                     <h4 className="footer-heading">Contacto Directo</h4>
                     <div className="footer-contact-item">
                         <Mail size={15} />
-                        <a href="mailto:hello@everyday.com">hello@everyday.com</a>
+                        <a href="mailto:Everydayvzla@gmail.com">Everydayvzla@gmail.com</a>
                     </div>
                     <div className="footer-contact-item">
                         <MessageCircle size={15} />
-                        <a href="https://wa.me/584241539300" target="_blank" rel="noreferrer">Escríbenos al WhatsApp (+58 424-1539300)</a>
+                        <a href="https://wa.me/584125594826" target="_blank" rel="noreferrer">Escríbenos al WhatsApp (+58 412-5594826)</a>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ const Shop = () => {
         const precioVal = p.finalPrice || p.suggestedPrice || p.salePrice || 0;
         const precio = precioVal.toFixed(2);
         const texto = `¡Hola! Me interesa: *${p.name}* — $${precio}. ¿Está disponible?`;
-        window.open(`https://wa.me/584241539300?text=${encodeURIComponent(texto)}`, '_blank');
+        window.open(`https://wa.me/584125594826?text=${encodeURIComponent(texto)}`, '_blank');
     };
 
     const filtrados = productos
@@ -258,7 +258,7 @@ const Shop = () => {
                         </p>
                         <button
                             className="ed-sh__cta-btn"
-                            onClick={() => window.open('https://wa.me/584241539300?text=Hola%2C%20me%20gustar%C3%ADa%20un%20dise%C3%B1o%20personalizado', '_blank')}
+                            onClick={() => window.open('https://wa.me/584125594826?text=Hola%2C%20me%20gustar%C3%ADa%20un%20dise%C3%B1o%20personalizado', '_blank')}
                         >
                             <MessageCircle size={18} />
                             Hablar por WhatsApp

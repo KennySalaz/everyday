@@ -106,7 +106,7 @@ export default function LoginPage() {
                                 className="lp-input"
                                 value={email}
                                 onChange={e => { setEmail(e.target.value); setError(''); }}
-                                placeholder="correo@ejemplo.com"
+                                placeholder="Everydayvzla@gmail.com"
                                 autoComplete="email"
                                 autoFocus
                                 required

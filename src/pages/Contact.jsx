@@ -7,14 +7,14 @@ const CANALES = [
     {
         icon: <MessageCircle size={22} />,
         label: 'WhatsApp',
-        value: '+58 424-153-9300',
-        href: 'https://wa.me/584241539300',
+        value: '+58 412-559-4826',
+        href: 'https://wa.me/584125594826',
     },
     {
         icon: <Mail size={22} />,
         label: 'Correo',
-        value: 'info@everyday.com',
-        href: 'mailto:info@everyday.com',
+        value: 'Everydayvzla@gmail.com',
+        href: 'mailto:Everydayvzla@gmail.com',
     },
     {
         icon: <MapPin size={22} />,
@@ -84,11 +84,11 @@ const Contact = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <a href="https://wa.me/584241539300" target="_blank" rel="noreferrer" className="ed-ct__hero-chip">
+                        <a href="https://wa.me/584125594826" target="_blank" rel="noreferrer" className="ed-ct__hero-chip">
                             <MessageCircle size={14} />
                             WhatsApp
                         </a>
-                        <a href="mailto:info@everyday.com" className="ed-ct__hero-chip">
+                        <a href="mailto:Everydayvzla@gmail.com" className="ed-ct__hero-chip">
                             <Mail size={14} />
                             Email
                         </a>
@@ -157,7 +157,7 @@ const Contact = () => {
                                 <a href="https://facebook.com" target="_blank" rel="noreferrer" className="ed-ct__social-btn" aria-label="Facebook">
                                     <Facebook size={18} />
                                 </a>
-                                <a href="https://wa.me/584241539300" target="_blank" rel="noreferrer" className="ed-ct__social-btn" aria-label="WhatsApp">
+                                <a href="https://wa.me/584125594826" target="_blank" rel="noreferrer" className="ed-ct__social-btn" aria-label="WhatsApp">
                                     <MessageCircle size={18} />
                                 </a>
                             </div>
@@ -269,7 +269,7 @@ const Contact = () => {
                             Escríbenos por WhatsApp y te atendemos en minutos.
                         </p>
                         <a
-                            href="https://wa.me/584241539300?text=Hola%20Everyday%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20joyas"
+                            href="https://wa.me/584125594826?text=Hola%20Everyday%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20joyas"
                             target="_blank"
                             rel="noreferrer"
                             className="ed-ct__wa-btn"

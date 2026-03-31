@@ -91,6 +91,7 @@ export default function PricingDashboard({ initialTab }) {
 
     // Builder State
     const [productName, setProductName] = useState('');
+    const [productDescription, setProductDescription] = useState('');
     const [productImage, setProductImage] = useState(null);
     const [productImagePreview, setProductImagePreview] = useState('');
     const [isUploading, setIsUploading] = useState(false);
@@ -101,6 +102,7 @@ export default function PricingDashboard({ initialTab }) {
 
     // Edit mode
     const [editingProductId, setEditingProductId] = useState(null);
+    const [selectedCoverUrl, setSelectedCoverUrl] = useState('');
 
     // Shipping state for reference
     const [shippingCost, setShippingCost] = useState('');
@@ -295,7 +297,7 @@ export default function PricingDashboard({ initialTab }) {
     const handleSaveQuote = async () => {
         if (!productName || selectedItems.length === 0) return;
 
-        let finalImageUrl = productImagePreview; // Keep existing if editing but not changing picture
+        let finalImageUrl = productImagePreview; 
 
         if (productImage) {
             setIsUploading(true);
@@ -308,6 +310,8 @@ export default function PricingDashboard({ initialTab }) {
                 return;
             }
             setIsUploading(false);
+        } else if (selectedCoverUrl) {
+            finalImageUrl = selectedCoverUrl;
         }
 
         // Calcular costo de envío por unidad
@@ -318,6 +322,7 @@ export default function PricingDashboard({ initialTab }) {
         const newProduct = {
             id: editingProductId || Date.now().toString(),
             name: productName,
+            description: productDescription,
             imageUrl: finalImageUrl,
             items: selectedItems,
             totalCost,
@@ -338,6 +343,7 @@ export default function PricingDashboard({ initialTab }) {
 
         // Form Reset
         setProductName('');
+        setProductDescription('');
         setProductImage(null);
         setProductImagePreview('');
         setProductionQty(1);
@@ -346,6 +352,7 @@ export default function PricingDashboard({ initialTab }) {
         setSelectedItems([]);
         setProfitMargin(30);
         setCurrentStep(1);
+        setSelectedCoverUrl('');
 
         // Navigate
         navigate('/ed-admin-2026');
@@ -381,12 +388,14 @@ export default function PricingDashboard({ initialTab }) {
     const handleEditProduct = (product) => {
         setEditingProductId(product.id);
         setProductName(product.name);
+        setProductDescription(product.description || '');
         setProductImagePreview(product.imageUrl || '');
         setProductImage(null);
         setProductionQty(product.stock);
         setProductCategory(product.category || 'otros');
         setSelectedItems(product.items);
         setProfitMargin(product.profitMargin);
+        setSelectedCoverUrl(product.imageUrl || '');
         setCurrentStep(1);
         navigate('/ed-admin-2026/builder');
     };
@@ -590,7 +599,7 @@ export default function PricingDashboard({ initialTab }) {
                                         {/* Image Display */}
                                         <div style={{ width: '100%', height: '160px', borderRadius: '12px', background: 'var(--color-background-off)', marginBottom: '0.5rem', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             {product.imageUrl ? (
-                                                <img src={product.imageUrl} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                <img src={product.imageUrl} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                             ) : (
                                                 <ImageIcon size={40} color="var(--color-text-light)" style={{ opacity: 0.3 }} />
                                             )}
@@ -808,6 +817,17 @@ export default function PricingDashboard({ initialTab }) {
                                                 >
                                                     {CATEGORIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
                                                 </select>
+                                            </div>
+
+                                            <div className="input-group" style={{ gridColumn: '1 / -1' }}>
+                                                <label className="step1-field-label">Descripción</label>
+                                                <textarea
+                                                    className="styled-input"
+                                                    placeholder="Describe tu pieza (materiales, cuidados, etc.)"
+                                                    value={productDescription}
+                                                    onChange={e => setProductDescription(e.target.value)}
+                                                    style={{ minHeight: '80px', resize: 'vertical' }}
+                                                />
                                             </div>
 
                                             <div className="input-group">
@@ -1071,6 +1091,61 @@ export default function PricingDashboard({ initialTab }) {
                                                     return (suggestedPrice + envioPorUnidad).toFixed(2);
                                                 })()
                                             }</span>
+                                        </div>
+
+                                        {/* Nueva Sección: Selección de Foto de Portada */}
+                                        <div className="admin-card" style={{ marginTop: '1.5rem', padding: '1.25rem', border: '1px solid var(--color-accent)' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                                <ImageIcon size={20} color="var(--color-accent)" />
+                                                <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-primary)' }}>Foto de Portada (Opcional)</h4>
+                                            </div>
+                                            <p style={{ fontSize: '0.85rem', color: 'var(--color-text-light)', marginBottom: '1rem' }}>
+                                                Selecciona una foto de los insumos o mantén la que subiste en el paso 1.
+                                            </p>
+                                            
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '0.75rem' }}>
+                                                {productImagePreview && (
+                                                    <div 
+                                                        onClick={() => setSelectedCoverUrl(productImagePreview)}
+                                                        style={{ 
+                                                            position: 'relative', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
+                                                            border: selectedCoverUrl === productImagePreview ? '3px solid var(--color-accent)' : '2px solid transparent',
+                                                            boxShadow: selectedCoverUrl === productImagePreview ? '0 0 10px rgba(212,175,55,0.3)' : 'none'
+                                                        }}
+                                                    >
+                                                        <img src={productImagePreview} alt="Original" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                        {selectedCoverUrl === productImagePreview && (
+                                                            <div style={{ position: 'absolute', top: 4, right: 4, background: 'var(--color-accent)', color: 'white', borderRadius: '50%', padding: '2px' }}>
+                                                                <div style={{ width: 6, height: 6, background: 'white', borderRadius: '50%' }}></div>
+                                                            </div>
+                                                        )}
+                                                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.5)', color: 'white', fontSize: '0.6rem', textAlign: 'center', padding: '2px 0' }}> Principal </div>
+                                                    </div>
+                                                )}
+
+                                                {selectedItems
+                                                    .filter(sel => sel.itemRef.imageUrl && sel.itemRef.imageUrl !== productImagePreview)
+                                                    .map((sel, idx) => (
+                                                    <div 
+                                                        key={`cover-opt-${idx}`}
+                                                        onClick={() => {
+                                                            setSelectedCoverUrl(sel.itemRef.imageUrl);
+                                                            if (!productImage) setProductImagePreview(sel.itemRef.imageUrl);
+                                                        }}
+                                                        style={{ 
+                                                            position: 'relative', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
+                                                            border: selectedCoverUrl === sel.itemRef.imageUrl ? '3px solid var(--color-accent)' : '2px solid #f1f5f9'
+                                                        }}
+                                                    >
+                                                        <img src={sel.itemRef.imageUrl} alt={sel.itemRef.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                        {selectedCoverUrl === sel.itemRef.imageUrl && (
+                                                            <div style={{ position: 'absolute', top: 4, right: 4, background: 'var(--color-accent)', color: 'white', borderRadius: '50%', padding: '2px' }}>
+                                                                <div style={{ width: 6, height: 6, background: 'white', borderRadius: '50%' }}></div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
 

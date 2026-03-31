@@ -30,7 +30,8 @@ const Shop = () => {
     }, []);
 
     const handleWhatsApp = (p) => {
-        const precio = p.salePrice ? p.salePrice.toFixed(2) : '0.00';
+        const precioVal = p.finalPrice || p.suggestedPrice || p.salePrice || 0;
+        const precio = precioVal.toFixed(2);
         const texto = `¡Hola! Me interesa: *${p.name}* — $${precio}. ¿Está disponible?`;
         window.open(`https://wa.me/584241539300?text=${encodeURIComponent(texto)}`, '_blank');
     };
@@ -38,12 +39,12 @@ const Shop = () => {
     const filtrados = productos
         .filter(p => {
             const busq = p.name?.toLowerCase().includes(busqueda.toLowerCase());
-            const cat  = catActiva === 'Todas' || p.category === catActiva;
+            const cat  = catActiva === 'Todas' || p.category?.toLowerCase() === catActiva.toLowerCase();
             return busq && cat;
         })
         .sort((a, b) => {
-            if (orden === 'precio-asc')  return (a.salePrice || 0) - (b.salePrice || 0);
-            if (orden === 'precio-desc') return (b.salePrice || 0) - (a.salePrice || 0);
+            if (orden === 'precio-asc')  return (a.finalPrice || a.suggestedPrice || 0) - (b.finalPrice || b.suggestedPrice || 0);
+            if (orden === 'precio-desc') return (b.finalPrice || b.suggestedPrice || 0) - (a.finalPrice || a.suggestedPrice || 0);
             if (orden === 'nombre')      return (a.name || '').localeCompare(b.name || '');
             return 0;
         });
@@ -215,7 +216,7 @@ const Shop = () => {
                                             </div>
                                             <div className="ed-sh__card-bottom">
                                                 <span className="ed-sh__card-price">
-                                                    ${p.salePrice ? p.salePrice.toFixed(2) : '0.00'}
+                                                    ${(p.finalPrice || p.suggestedPrice || p.salePrice || 0).toFixed(2)}
                                                 </span>
                                                 <button
                                                     className="ed-sh__card-buy"

@@ -1000,7 +1000,7 @@
 .card-center-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .fallback-icon-large {
@@ -1269,7 +1269,7 @@
 .catalog-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .catalog-icon {
@@ -1415,7 +1415,7 @@
 .csr-icon img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .csr-info {
@@ -1560,7 +1560,7 @@
 .quote-item-thumb img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .quote-item-icon {
@@ -1832,7 +1832,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .step1-remove-img {

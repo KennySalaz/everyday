@@ -370,7 +370,7 @@
 .ed-sh__card-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.7s var(--sh-ease);
 }
 .ed-sh__card:hover .ed-sh__card-media img,

@@ -21,7 +21,8 @@ import {
     Image as ImageIcon,
     UploadCloud,
     X,
-    Eye
+    Eye,
+    Star
 } from 'lucide-react';
 import { uploadToBunny } from '../utils/bunny';
 import InventoryModal from './Dashboard/InventoryModal';
@@ -114,6 +115,26 @@ export default function PricingDashboard({ initialTab }) {
     const [inventorySearch, setInventorySearch] = useState('');
     const [inventoryTypeFilter, setInventoryTypeFilter] = useState('all'); // all, materia, empaque
     const [catalogSearch, setCatalogSearch] = useState('');
+
+    // Pre-load default items when builder opens for a NEW product
+    useEffect(() => {
+        if (activeTab === 'builder' && !editingProductId && selectedItems.length === 0 && inventory.length > 0) {
+            const defaults = inventory
+                .filter(item => item.isDefault)
+                .map(item => ({ inventoryId: item.id, qty: 1, itemRef: item }));
+            if (defaults.length > 0) setSelectedItems(defaults);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab, inventory]);
+
+    // Toggle default flag on inventory item
+    const handleToggleDefault = async (item) => {
+        await updateInventoryItem({ ...item, isDefault: !item.isDefault });
+        Toast.fire({
+            icon: 'success',
+            title: item.isDefault ? 'Ya no es predeterminado' : '¡Marcado como predeterminado!'
+        });
+    };
 
     // Add to Inventory from Modal
     const handleAddInventory = async (newItem) => {
@@ -228,6 +249,14 @@ export default function PricingDashboard({ initialTab }) {
                                             {item.type === 'materia' ? 'Materia' : item.type === 'encamino' ? 'En camino' : 'Empaque'}
                                         </span>
                                         <div className="action-buttons">
+                                            <button
+                                                className="glass-icon-btn"
+                                                onClick={() => handleToggleDefault(item)}
+                                                title={item.isDefault ? 'Quitar predeterminado' : 'Marcar como predeterminado'}
+                                                style={{ color: item.isDefault ? '#f59e0b' : undefined }}
+                                            >
+                                                <Star size={14} fill={item.isDefault ? '#f59e0b' : 'none'} />
+                                            </button>
                                             <button className="glass-icon-btn" onClick={() => setDetailInventoryItem(item)} title="Ver detalle">
                                                 <Eye size={14} />
                                             </button>
@@ -905,6 +934,11 @@ export default function PricingDashboard({ initialTab }) {
                                                         className={`catalog-card ${isSelected ? 'selected' : ''}`}
                                                         onClick={() => toggleItemInBuilder(item)}
                                                     >
+                                                        {item.isDefault && (
+                                                            <div style={{ position: 'absolute', top: '6px', left: '6px', background: '#f59e0b', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }} title="Predeterminado">
+                                                                <Star size={11} fill="white" color="white" />
+                                                            </div>
+                                                        )}
                                                         {isSelected && (
                                                             <div className="catalog-check">✓</div>
                                                         )}

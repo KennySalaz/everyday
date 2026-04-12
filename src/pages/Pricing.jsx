@@ -113,6 +113,7 @@ export default function PricingDashboard({ initialTab }) {
     const [overviewCategoryFilter, setOverviewCategoryFilter] = useState('all');
     const [inventorySearch, setInventorySearch] = useState('');
     const [inventoryTypeFilter, setInventoryTypeFilter] = useState('all'); // all, materia, empaque
+    const [catalogSearch, setCatalogSearch] = useState('');
 
     // Add to Inventory from Modal
     const handleAddInventory = async (newItem) => {
@@ -168,7 +169,12 @@ export default function PricingDashboard({ initialTab }) {
                     </button>
                 </div>
 
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--color-primary)' }}>Stock Disponible</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                    <h3 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--color-primary)' }}>Stock Disponible</h3>
+                    <span style={{ background: 'rgba(67,24,255,0.08)', color: 'var(--color-primary)', fontSize: '0.75rem', fontWeight: 700, padding: '3px 10px', borderRadius: '99px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        {filtered.length} {filtered.length === 1 ? 'item' : 'items'}{inventorySearch || inventoryTypeFilter !== 'all' ? ` de ${inventory.length}` : ''}
+                    </span>
+                </div>
 
                 {/* Filters */}
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -868,8 +874,29 @@ export default function PricingDashboard({ initialTab }) {
                                                 <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: 'var(--color-text-light)' }}>Toca un insumo para añadirlo al producto</p>
                                             </div>
                                         </div>
+                                        {/* Search bar + count */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                            <div style={{ position: 'relative', flex: 1 }}>
+                                                <Search size={16} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-light)', pointerEvents: 'none' }} />
+                                                <input
+                                                    type="text"
+                                                    className="styled-input"
+                                                    placeholder="Buscar pieza..."
+                                                    value={catalogSearch}
+                                                    onChange={e => setCatalogSearch(e.target.value)}
+                                                    style={{ paddingLeft: '2.4rem', padding: '0.6rem 1rem 0.6rem 2.4rem', fontSize: '0.875rem' }}
+                                                />
+                                            </div>
+                                            <span style={{ background: 'rgba(67,24,255,0.08)', color: 'var(--color-primary)', fontSize: '0.75rem', fontWeight: 700, padding: '3px 10px', borderRadius: '99px', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                                                {(() => {
+                                                    const total = inventory.length;
+                                                    const shown = inventory.filter(item => item.name.toLowerCase().includes(catalogSearch.toLowerCase())).length;
+                                                    return catalogSearch ? `${shown} de ${total}` : `${total} piezas`;
+                                                })()}
+                                            </span>
+                                        </div>
                                         <div className="catalog-grid">
-                                            {inventory.filter(item => item.type !== 'encamino').map(item => {
+                                            {inventory.filter(item => item.name.toLowerCase().includes(catalogSearch.toLowerCase())).map(item => {
                                                 const isSelected = selectedItems.some(sel => sel.inventoryId === item.id);
                                                 const sel = selectedItems.find(s => s.inventoryId === item.id);
                                                 return (
@@ -888,7 +915,7 @@ export default function PricingDashboard({ initialTab }) {
                                                             }
                                                         </div>
                                                         <div className="catalog-info">
-                                                            <span className="catalog-badge">{item.type === 'materia' ? 'Materia' : 'Empaque'}</span>
+                                                            <span className="catalog-badge">{item.type === 'materia' ? 'Materia' : item.type === 'encamino' ? 'En camino' : 'Empaque'}</span>
                                                             <p className="catalog-name">{item.name}</p>
                                                             <p className="catalog-price">${formatUnitCost(item.unitCost)} <span>c/u</span></p>
                                                         </div>
@@ -902,6 +929,12 @@ export default function PricingDashboard({ initialTab }) {
                                                     </div>
                                                 );
                                             })}
+                                            {inventory.filter(item => item.name.toLowerCase().includes(catalogSearch.toLowerCase())).length === 0 && (
+                                                <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: 'var(--color-text-light)' }}>
+                                                    <Search size={28} style={{ opacity: 0.4, marginBottom: '0.5rem' }} />
+                                                    <p style={{ margin: 0, fontSize: '0.875rem' }}>No se encontraron piezas.</p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 

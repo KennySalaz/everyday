@@ -21,7 +21,7 @@ const Footer = () => {
                     <div className="footer-logo-wrap">
                         <img src={logoWhite} alt="Everyday" className="footer-logo-img" />
                     </div>
-                    <p>Joyas atemporales creadas para tus momentos cotidianos. Elaboradas a mano con amor y materiales responsables.</p>
+                   Joyas atemporales creadas para tus momentos especiales. Con materiales responsables.
                     <div className="footer-socials">
                         <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
                             <Instagram size={18} />

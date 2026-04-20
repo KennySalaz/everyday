@@ -214,6 +214,7 @@ const Shop = () => {
                         <h2 className="ed-sh__cta-title">
                             ¿No encontraste<br /><em>lo que buscas?</em>
                         </h2>
+                        <p className='ed-sh__cta-desc'>CONTÁCTANOS y te ayudamos</p>
 
                         <div className="ed-sh__cta-btns">
                             <button

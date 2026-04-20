@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, MessageCircle, Mail, ArrowRight } from 'lucide-react';
+import logoWhite from '../../assets/logos/Logo blancoEveryday.png';
+import logoSun   from '../../assets/logos/Recurso 2cajita.png';
 import './Footer.css';
 
 const Footer = () => {
     return (
         <footer className="footer">
+            {/* Fondo decorativo: logos repetidos */}
+            <div className="footer-bg-logos" aria-hidden="true">
+                {Array(10).fill(null).map((_, i) => (
+                    <img key={i} src={i % 3 === 1 ? logoSun : logoWhite} alt="" className="footer-bg-logo-item" />
+                ))}
+            </div>
+
             <div className="footer-inner container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
                 {/* Column 1: Brand */}
                 <div className="footer-col footer-brand" style={{ maxWidth: '400px' }}>
-                    <h3 className="footer-logo">Everyday</h3>
+                    <div className="footer-logo-wrap">
+                        <img src={logoWhite} alt="Everyday" className="footer-logo-img" />
+                    </div>
                     <p>Joyas atemporales creadas para tus momentos cotidianos. Elaboradas a mano con amor y materiales responsables.</p>
                     <div className="footer-socials">
                         <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">

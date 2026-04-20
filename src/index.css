@@ -1,5 +1,58 @@
+/* ══════════════════════════════════════════
+   TIPOGRAFÍAS EVERYDAY
+   - Hangyaboly  → Títulos / Display
+   - Avenir      → Cuerpo / UI
+══════════════════════════════════════════ */
+
+/* Hangyaboly – agrega los archivos a /public/fonts/ */
+@font-face {
+  font-family: 'Hangyaboly';
+  src: url('/fonts/Hangyaboly.woff2') format('woff2'),
+       url('/fonts/Hangyaboly.woff')  format('woff'),
+       url('/fonts/Hangyaboly.ttf')   format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Avenir – sistema nativo en Apple + fallback web */
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Light'),
+       local('Avenir-Light');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Roman'),
+       local('Avenir-Roman'),
+       local('Avenir Book'),
+       local('Avenir-Book');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Medium'),
+       local('Avenir-Medium');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Heavy'),
+       local('Avenir-Heavy');
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
-  /* Color Palette */
+  /* ── Fuentes ─────────────────────────── */
+  --font-display: 'Hangyaboly', 'Playfair Display', Georgia, serif;
+  --font-body:    'Avenir', 'Avenir Next', 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+
   --color-primary: #4A3B32;
   --color-secondary: #F5F1E6;
   --color-accent: #D4AF37;
@@ -10,8 +63,8 @@
   --color-background-off: #FAFAF9;
   --color-border: rgba(0,0,0,0.07);
 
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Lato', sans-serif;
+  --font-heading: var(--font-display);
+  --font-body: 'Avenir', 'Avenir Next', 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;

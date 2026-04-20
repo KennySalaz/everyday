@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logoBlack from '../../assets/logos/Everyday.png';
+import logoWhite from '../../assets/logos/Logo blancoEveryday.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -28,16 +30,18 @@ const Navbar = () => {
         <>
             <nav className={`navbar ${isScrolled || !isHome ? 'is-scrolled' : ''}`}>
                 <div className="container navbar-container">
-                    <div className="navbar-logo">
-                        <Link to="/">Everyday</Link>
-                    </div>
-
-                    {/* Desktop Menu */}
+        <div className="navbar-logo">
+                <Link to="/">
+                    <img
+                        src={isScrolled || !isHome ? logoBlack : logoWhite}
+                        alt="Everyday"
+                        className="navbar-logo-img"
+                    />
+                </Link>
+            </div>                    {/* Desktop Menu */}
                     <ul className="navbar-links desktop-only">
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/shop">Tienda</Link></li>
-                        <li><Link to="/about">Nosotros</Link></li>
-                        <li><Link to="/contact">Contacto</Link></li>
                     </ul>
 
                     <div className="navbar-actions">
@@ -54,8 +58,6 @@ const Navbar = () => {
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/shop">Tienda</Link></li>
-                        <li><Link to="/about">Nosotros</Link></li>
-                        <li><Link to="/contact">Contacto</Link></li>
                     </ul>
                 </div>
             </div>

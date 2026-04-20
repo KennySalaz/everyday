@@ -1,0 +1,569 @@
+/* ══════════════════════════════════════════
+   THEME SWITCHER – Panel flotante
+══════════════════════════════════════════ */
+
+/* ── Botón trigger ─────────────────────── */
+.ts-trigger {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    z-index: 9999;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+    flex-direction: column;
+    gap: 3px;
+}
+.ts-trigger:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.45);
+}
+.ts-trigger-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+.ts-trigger-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1;
+}
+
+/* ── Panel ─────────────────────────────── */
+.ts-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.8rem;
+    z-index: 9998;
+    width: 340px;
+    max-height: 82vh;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 28px 90px rgba(0,0,0,0.28);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: ts-slide-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes ts-slide-up {
+    from { opacity: 0; transform: translateY(24px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header */
+.ts-panel-header {
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ts-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.ts-header-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.9);
+}
+.ts-header-count {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+}
+.ts-header-active {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.7rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Filtros */
+.ts-filters {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.7rem 0.8rem;
+    background: #fafafa;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+}
+.ts-filters::-webkit-scrollbar { display: none; }
+.ts-filter-btn {
+    padding: 0.3rem 0.7rem;
+    border-radius: 50px;
+    border: 1.5px solid #e0e0e0;
+    background: #fff;
+    color: #666;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+}
+.ts-filter-btn:hover {
+    border-color: #aaa;
+    color: #333;
+}
+.ts-filter-btn--active {
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Grid de cards de tema */
+.ts-grid {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+.ts-grid::-webkit-scrollbar { width: 4px; }
+.ts-grid::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+.ts-card {
+    width: 100%;
+    border: 2.5px solid transparent;
+    border-radius: 14px;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.18s, box-shadow 0.2s;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+.ts-card:hover, .ts-card--hovered {
+    transform: translateX(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.14);
+}
+.ts-card--active {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+/* Barra de colores */
+.ts-color-bar {
+    display: flex;
+    height: 8px;
+}
+.ts-bar-seg {
+    flex: 1;
+    display: block;
+}
+
+/* Body de la card */
+.ts-card-body {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.8rem;
+}
+.ts-card-emoji {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.ts-card-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.ts-card-text strong {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+.ts-card-text span {
+    font-size: 0.67rem;
+    font-weight: 300;
+    opacity: 0.85;
+}
+.ts-check-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Live preview */
+.ts-live-preview {
+    border-top: 1px solid rgba(0,0,0,0.07);
+    padding: 0.6rem 0.8rem 0.5rem;
+    background: #f7f7f7;
+    flex-shrink: 0;
+}
+.ts-live-label {
+    font-size: 0.7rem;
+    color: #888;
+    margin-bottom: 0.4rem;
+}
+.ts-live-label strong {
+    color: #333;
+    font-weight: 700;
+}
+
+/* Mini preview (reutilizado) */
+.ts-preview {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+}
+.ts-prev-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+}
+.ts-prev-hero {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.ts-prev-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 4px;
+}
+.ts-prev-card {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Footer con HEX */
+.ts-footer {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    flex-shrink: 0;
+}
+.ts-footer > p {
+    font-size: 0.72rem;
+    margin-bottom: 0.5rem;
+}
+.ts-codes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.ts-code-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.28rem 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.ts-code-row:hover {
+    background: rgba(0,0,0,0.05);
+}
+.ts-code-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    border: 1.5px solid rgba(0,0,0,0.08);
+}
+.ts-code-label {
+    flex: 1;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+.ts-code-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+/* ── Responsive ────────────────────────── */
+@media (max-width: 480px) {
+    .ts-panel {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+        bottom: 4.5rem;
+        max-height: 78vh;
+    }
+    .ts-trigger {
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+
+/* ── Botón trigger ─────────────────────── */
+.ts-trigger {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    z-index: 9999;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: none;
+    background: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    flex-direction: column;
+    gap: 3px;
+}
+.ts-trigger:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.45);
+}
+.ts-trigger--open {
+    background: #333;
+}
+.ts-trigger-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: background 0.3s ease;
+}
+.ts-trigger-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1;
+}
+
+/* ── Panel ─────────────────────────────── */
+.ts-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.8rem;
+    z-index: 9998;
+    width: 320px;
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: ts-slide-up 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes ts-slide-up {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.ts-panel-header {
+    padding: 1rem 1.2rem 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    background: #fafafa;
+}
+.ts-panel-header span:first-child {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+.ts-active-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a1a1a !important;
+    background: #f0f0f0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+}
+
+/* ── Lista de temas ────────────────────── */
+.ts-list {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    scrollbar-width: thin;
+}
+
+.ts-item {
+    width: 100%;
+    border: 2.5px solid transparent;
+    border-radius: 14px;
+    padding: 0.7rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+.ts-item:hover {
+    transform: translateX(-2px);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+}
+.ts-item--active {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+/* Puntos de colores */
+.ts-swatches {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0.5rem;
+}
+.ts-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    display: inline-block;
+}
+
+/* Mini preview */
+.ts-preview {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.ts-prev-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 6px;
+}
+.ts-prev-hero {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+}
+.ts-prev-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 4px;
+}
+.ts-prev-card {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Info del tema */
+.ts-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.ts-item-info strong {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+.ts-item-info span {
+    font-size: 0.68rem;
+    font-weight: 300;
+    opacity: 0.85;
+}
+
+/* Check activo */
+.ts-check {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Footer con códigos ────────────────── */
+.ts-footer {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba(0,0,0,0.07);
+}
+.ts-footer > p {
+    font-size: 0.72rem;
+    margin-bottom: 0.5rem;
+}
+.ts-codes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.ts-code-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.ts-code-row:hover {
+    background: rgba(255,255,255,0.9);
+}
+.ts-code-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.ts-code-label {
+    flex: 1;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+.ts-code-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+/* ── Responsive ────────────────────────── */
+@media (max-width: 480px) {
+    .ts-panel {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+        bottom: 4.5rem;
+    }
+    .ts-trigger {
+        right: 1rem;
+        bottom: 1rem;
+    }
+}

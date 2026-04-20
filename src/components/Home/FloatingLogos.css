@@ -1,0 +1,37 @@
+/* ── FloatingLogos ─────────────────────────────────────── */
+
+.fl-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Activa pointer-events solo en las piezas */
+.fl-piece {
+  position: absolute;
+  pointer-events: auto;
+  cursor: default;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.fl-piece img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Filtro según modo */
+}
+
+/* Modo dark: logos blancos sobre fondo oscuro */
+.fl-container--dark .fl-piece img {
+  filter: brightness(0) invert(1);
+}
+
+/* Modo light: logos negros/dorados sobre fondo claro */
+.fl-container--light .fl-piece img {
+  filter: none;
+}

@@ -1,8 +1,50 @@
 /* ── Footer ──────────────────────────────────────────────── */
 .footer {
-  background-color: #1e1610;
-  color: rgba(245, 241, 230, 0.7);
+  background-color: var(--theme-nav-bg, #1e1610);
+  color: var(--theme-text-soft, rgba(245,241,230,0.7));
   padding-top: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Logos de fondo repetidos */
+.footer-bg-logos {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-bg-logo-item {
+  width: clamp(80px, 12vw, 160px);
+  height: auto;
+  opacity: 0.04;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+/* Contenido sobre el fondo */
+.footer-inner,
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo imagen */
+.footer-logo-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.footer-logo-img {
+  height: 38px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
 }
 
 .footer-inner {
@@ -41,7 +83,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(245, 241, 230, 0.6);
+  color: var(--theme-text-soft, rgba(245,241,230,0.6));
   transition: all 0.3s;
 }
 
@@ -71,7 +113,7 @@
 .footer-links a,
 .footer-links li {
   font-size: 0.88rem;
-  color: rgba(245, 241, 230, 0.6);
+  color: var(--theme-text-soft, rgba(245,241,230,0.6));
   text-decoration: none;
   transition: color 0.3s;
   cursor: pointer;
@@ -89,7 +131,7 @@
   gap: 0.6rem;
   margin-bottom: 0.75rem;
   font-size: 0.88rem;
-  color: rgba(245, 241, 230, 0.6);
+  color: var(--theme-text-soft, rgba(245,241,230,0.6));
 }
 
 .footer-contact-item svg {

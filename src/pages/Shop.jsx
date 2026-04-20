@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Search, X, SlidersHorizontal, ArrowRight, Sparkles } from 'lucide-react';
+import { MessageCircle, Search, X, SlidersHorizontal, ArrowRight, Sparkles, Instagram, Mail } from 'lucide-react';
 import { db } from '../config/firebase';
 import { collection, onSnapshot, query } from 'firebase/firestore';
+import LogoBrandHero from '../components/Home/LogoBrand';
 import './Shop.css';
 
 const CATS = ['Todas', 'Anillos', 'Collares', 'Pulseras', 'Aretes', 'Sets'];
@@ -53,47 +54,7 @@ const Shop = () => {
         <div className="ed-sh__page">
 
             {/* ════ HERO ════════════════════════════════════ */}
-            <section className="ed-sh__hero">
-                <div className="ed-sh__hero-media">
-                    <div className="ed-sh__hero-img" />
-                    <div className="ed-sh__hero-veil" />
-                </div>
-                <div className="ed-sh__hero-body">
-                    <motion.div
-                        className="ed-sh__hero-inner"
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <div className="ed-sh__hero-tag">
-                            <Sparkles size={10} />
-                            <span>Colección 2026</span>
-                        </div>
-                        <h1 className="ed-sh__hero-title">
-                            Cada pieza,<br /><em>una historia</em>
-                        </h1>
-                        <p className="ed-sh__hero-desc">
-                            Joyas artesanales únicas, elaboradas con materiales de primera calidad para acompañar tus momentos.
-                        </p>
-                    </motion.div>
-                    <div className="ed-sh__hero-deco" aria-hidden="true">✦</div>
-                </div>
-                <div className="ed-sh__hero-statsbar">
-                    <div className="ed-sh__hero-stats-inner">
-                        {[
-                            { val: '500+', lbl: 'Diseños únicos' },
-                            { val: '100%', lbl: 'Hecho a mano' },
-                            { val: '2K+',  lbl: 'Clientas felices' },
-                            { val: '15+',  lbl: 'Años de artesanía' },
-                        ].map((s, i) => (
-                            <div key={i} className="ed-sh__stat-item">
-                                <strong>{s.val}</strong>
-                                <span>{s.lbl}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <LogoBrandHero />
 
             {/* ════ FILTROS ══════════════════════════════════ */}
             <div className="ed-sh__filters-rail">
@@ -248,21 +209,35 @@ const Shop = () => {
                     >
                         <div className="ed-sh__cta-tag">
                             <Sparkles size={10} />
-                            <span>Pedido personalizado</span>
+                           
                         </div>
                         <h2 className="ed-sh__cta-title">
                             ¿No encontraste<br /><em>lo que buscas?</em>
                         </h2>
-                        <p className="ed-sh__cta-sub">
-                            Cuéntanos tu idea y creamos la pieza perfecta, exclusivamente para ti.
-                        </p>
-                        <button
-                            className="ed-sh__cta-btn"
-                            onClick={() => window.open('https://wa.me/584125594826?text=Hola%2C%20me%20gustar%C3%ADa%20un%20dise%C3%B1o%20personalizado', '_blank')}
-                        >
-                            <MessageCircle size={18} />
-                            Hablar por WhatsApp
-                        </button>
+
+                        <div className="ed-sh__cta-btns">
+                            <button
+                                className="ed-sh__cta-btn ed-sh__cta-btn--wa"
+                                onClick={() => window.open('https://wa.me/584125594826?text=Hola%2C%20me%20gustar%C3%ADa%20un%20dise%C3%B1o%20personalizado', '_blank')}
+                            >
+                                <MessageCircle size={17} />
+                                WhatsApp
+                            </button>
+                            <button
+                                className="ed-sh__cta-btn ed-sh__cta-btn--ig"
+                                onClick={() => window.open('https://instagram.com/everyday_vzla', '_blank')}
+                            >
+                                <Instagram size={17} />
+                                Instagram
+                            </button>
+                            <button
+                                className="ed-sh__cta-btn ed-sh__cta-btn--mail"
+                                onClick={() => window.location.href = 'mailto:Everydayvzla@gmail.com?subject=Pedido%20personalizado'}
+                            >
+                                <Mail size={17} />
+                                Correo
+                            </button>
+                        </div>
                     </motion.div>
                     <div className="ed-sh__cta-deco" aria-hidden="true">
                         <div className="ed-sh__cta-ring ed-sh__cta-ring--1" />

@@ -9,8 +9,8 @@
   z-index: 1000;
   padding: 0;
   /* Estado por defecto: blanco sólido (todas las páginas menos Home sin scroll) */
-  background-color: rgba(255, 255, 255, 0.97);
-  border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+  background-color: var(--theme-nav-bg, rgba(255,255,255,0.97));
+  border-bottom: 1px solid var(--theme-border, rgba(74,59,50,0.08));
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -24,10 +24,10 @@
 
 /* ── Estado scrolleado / fuera de Home ────────────────── */
 .navbar.is-scrolled {
-  background-color: rgba(255, 255, 255, 0.97);
+  background-color: var(--theme-nav-bg, rgba(255,255,255,0.97));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+  border-bottom: 1px solid var(--theme-border, rgba(74,59,50,0.08));
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
@@ -41,15 +41,23 @@
 
 /* ── Logo ──────────────────────────────────────────────── */
 .navbar-logo a {
-  font-family: var(--font-heading, 'Playfair Display');
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: #ffffff; /* transparente = sobre hero oscuro */
 }
-.navbar.is-scrolled .navbar-logo a {
-  color: var(--color-primary, #4A3B32);
+
+.navbar-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+  transition: filter 0.3s, opacity 0.3s;
+  /* sobre hero oscuro: logo blanco ya viene blanco */
+}
+
+/* Cuando nav es transparente (hero) → el logo blanco ya es correcto */
+/* Cuando scrolleado → el logo negro ya es correcto (se cambia en JSX) */
+.navbar.is-scrolled .navbar-logo-img {
+  filter: none;
 }
 
 /* ── Links ─────────────────────────────────────────────── */
@@ -71,7 +79,7 @@
   color: rgba(255, 255, 255, 0.9); /* transparente = blanco */
 }
 .navbar.is-scrolled .navbar-links a {
-  color: #5a4d46;
+  color: var(--theme-nav-text, #5a4d46);
 }
 
 /* Underline hover */
@@ -107,7 +115,7 @@
   transition: color 0.2s, background 0.2s;
 }
 .navbar.is-scrolled .icon-btn {
-  color: #5a4d46;
+  color: var(--theme-nav-text, #5a4d46);
 }
 .icon-btn:hover { color: #D4AF37; }
 
@@ -125,7 +133,7 @@
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(13, 11, 9, 0.97);
+  background: var(--theme-nav-bg, rgba(13,11,9,0.97));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 999;

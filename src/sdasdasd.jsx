@@ -12,19 +12,18 @@ import DashboardLayout from './pages/Dashboard/DashboardLayout';
 import SalesDashboard from './pages/Dashboard/SalesDashboard';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import ColorExplorer from './pages/ColorExplorer';
-import { ThemeProvider } from './context/ThemeContext';
-import ThemeSwitcher from './components/UI/ThemeSwitcher';
 
 function PublicLayout({ children }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
   return (
     <>
+     
       <Navbar />
+      {/* Solo Home tiene hero full-screen que compensa el navbar fijo.
+          El resto necesita un offset para no quedar tapado */}
       <main style={isHome ? {} : { paddingTop: '70px' }}>{children}</main>
       <Footer />
-      <ThemeSwitcher />
     </>
   );
 }
@@ -58,7 +57,6 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/color-explorer" element={<ColorExplorer />} />
               </Routes>
             </PublicLayout>
           } />
@@ -68,10 +66,4 @@ function App() {
   );
 }
 
-export default function AppWithTheme() {
-  return (
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  );
-}
+export default App;

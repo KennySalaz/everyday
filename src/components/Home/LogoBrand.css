@@ -1,0 +1,161 @@
+/* ── LogoBrand ─────────────────────────────────────────── */
+
+/* ── Marquee ─────────────────────────────────────────────── */
+.lb-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 18px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.lb-marquee--light {
+  background: var(--theme-bg-off, #EDE8E1);
+  border-top:    1px solid var(--theme-border, rgba(44,24,16,0.08));
+  border-bottom: 1px solid var(--theme-border, rgba(44,24,16,0.08));
+}
+
+.lb-marquee--dark {
+  background: var(--theme-nav-bg, #1e1610);
+  border-top:    1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.lb-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: lb-scroll 28s linear infinite;
+}
+
+.lb-marquee__track:hover { animation-play-state: paused; }
+
+.lb-marquee__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
+}
+
+.lb-marquee__item img {
+  height: 32px;
+  width: auto;
+  display: block;
+  opacity: 0.75;
+  transition: opacity 0.3s;
+}
+
+.lb-marquee--dark .lb-marquee__item img {
+  filter: brightness(0) invert(1);
+}
+
+.lb-marquee__item:hover img { opacity: 1; }
+
+.lb-marquee__sun {
+  height: 22px !important;
+  opacity: 0.5 !important;
+}
+
+@keyframes lb-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Brand Hero Section ─────────────────────────────────── */
+.lb-brand-section {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--theme-bg, #F7F3EE);
+  padding: 80px 24px;
+}
+
+/* Grid de logos de fondo */
+.lb-bg-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0;
+  pointer-events: none;
+}
+
+.lb-bg-grid__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.lb-bg-grid__item img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  filter: var(--lb-grid-filter, none);
+}
+
+/* Contenido central */
+.lb-brand-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.lb-brand-sun {
+  width: 72px;
+  opacity: 0.65;
+}
+
+.lb-brand-sun img {
+  width: 100%;
+  height: auto;
+}
+
+.lb-brand-logo {
+  width: min(420px, 80vw);
+  cursor: pointer;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,0.10));
+  transition: filter 0.3s;
+}
+
+.lb-brand-logo:hover {
+  filter: drop-shadow(0 20px 48px rgba(212,175,55,0.25));
+}
+
+.lb-brand-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lb-brand-tagline {
+  font-family: var(--font-body, 'Avenir', sans-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--theme-text-soft, #888);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .lb-brand-logo img { filter: brightness(0) invert(1); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .lb-bg-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+  .lb-brand-section { min-height: 380px; padding: 56px 16px; }
+}

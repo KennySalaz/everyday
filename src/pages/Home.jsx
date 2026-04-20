@@ -575,6 +575,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── HECHO CON AMOR ────────────────────────────── */}
+      <LogoBrandHero />
+
       {/* ── GALERÍA INSTAGRAM ─────────────────────────── */}
       <div id="galeria">
         <Gallery />
